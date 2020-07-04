@@ -1,5 +1,4 @@
-FROM node:12.18.2-alpine3.11
-# FROM node:10.21.0-alpine3.11
+FROM node:14.5.0-alpine3.11
 
 ENV NODE_ENV=production
 ENV PATH=$PATH:/home/launchql/bin
