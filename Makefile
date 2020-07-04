@@ -37,3 +37,14 @@ push14:
 	docker push pyramation/launchql:0.5.5-node-14.5.0
 	docker push pyramation/sqitch-node:14.5.0
 	docker push pyramation/launchql-cli:0.5.5-node-14.5.0
+
+push:
+	docker push pyramation/launchql:0.5.5-node-10.21.0
+	docker push pyramation/sqitch-node:10.21.0
+	docker push pyramation/launchql-cli:0.5.5-node-10.21.0
+	docker push pyramation/launchql:0.5.5-node-12.18.2
+	docker push pyramation/sqitch-node:12.18.2
+	docker push pyramation/launchql-cli:0.5.5-node-12.18.2
+	docker push pyramation/launchql:0.5.5-node-14.5.0
+	docker push pyramation/sqitch-node:14.5.0
+	docker push pyramation/launchql-cli:0.5.5-node-14.5.0
