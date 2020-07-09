@@ -14,6 +14,11 @@ build12:
 alpine:
 	docker build -t pyramation/launchql-cli:0.5.5-alpine-12.18.2 node-12.18.2/launchql-cli-alpine/
 
+new:
+	docker build -t pyramation/sqitch:10.21.0 node-10.21.0/sqitch/ --build-arg VERSION=1.1.0
+	docker build -t pyramation/sqitch:12.18.2 node-12.18.2/sqitch/ --build-arg VERSION=1.1.0 
+	docker build -t pyramation/sqitch:14.5.0 node-14.5.0/sqitch/ --build-arg VERSION=1.1.0 
+
 build14:
 	docker build -t pyramation/launchql:0.5.5-node-14.5.0 node-14.5.0/launchql/
 	docker build -t pyramation/sqitch-node:14.5.0 --build-arg VERSION=1.1.0  node-14.5.0/sqitch-node/
