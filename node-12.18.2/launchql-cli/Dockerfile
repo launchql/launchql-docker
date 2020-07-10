@@ -1,28 +1,17 @@
-FROM pyramation/sqitch-node:12.18.2 
+FROM pyramation/sqitch:12.18.2-alpine3.11
 
 ENV NODE_ENV=production
 ENV PATH=$PATH:/home/launchql/bin
-RUN mkdir -p /home/launchql/bin
 
-RUN apt-get -qq update \
-    && apt-get -qq --no-install-recommends install \
-        git \
-        make \
-        gcc \
-        build-essential \
-        python \
-        libpq5 \
-        postgresql-client \
-    && apt-get clean  && \
-        rm -rf /var/lib/apt/lists/*
-
-# install with gyp BS
-RUN npm install @launchql/cli@0.5.5 --allow-root --unsafe-perm 
-    
-# lql command
-RUN echo '#!/bin/bash' > /home/launchql/bin/launchql
-RUN echo "/node_modules/@launchql/cli/main/index.js \$@" >> /home/launchql/bin/launchql
-RUN chmod +x /home/launchql/bin/launchql
-RUN cp /home/launchql/bin/launchql /home/launchql/bin/lql
+RUN mkdir -p /home/launchql/bin && \
+    apk add --no-cache bash && \
+    apk add --update --no-cache --virtual .build-deps alpine-sdk python && \
+    apk --no-cache add postgresql-client && \
+    npm install @launchql/cli@0.5.5 --allow-root --unsafe-perm  && \
+    echo '#!/bin/bash' > /home/launchql/bin/launchql && \
+    echo "/node_modules/@launchql/cli/main/index.js \$@" >> /home/launchql/bin/launchql && \
+    chmod +x /home/launchql/bin/launchql && \
+    cp /home/launchql/bin/launchql /home/launchql/bin/lql && \
+    apk del .build-deps
 
 ENTRYPOINT ["/bin/bash"]
