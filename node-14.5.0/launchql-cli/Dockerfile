@@ -7,7 +7,7 @@ RUN mkdir -p /home/launchql/bin && \
     apk add --no-cache bash && \
     apk add --update --no-cache --virtual .build-deps alpine-sdk python && \
     apk --no-cache add postgresql-client && \
-    npm install @launchql/cli@0.5.5 --allow-root --unsafe-perm  && \
+    npm install @launchql/cli@$VERSION --allow-root --unsafe-perm  && \
     echo '#!/bin/bash' > /home/launchql/bin/launchql && \
     echo "/node_modules/@launchql/cli/main/index.js \$@" >> /home/launchql/bin/launchql && \
     chmod +x /home/launchql/bin/launchql && \
