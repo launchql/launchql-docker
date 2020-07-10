@@ -4,6 +4,14 @@ def:
 	$(MAKE) cli
 	$(MAKE) launchql
 
+latest:
+	docker tag pyramation/sqitch:12.18.2-alpine3.11 pyramation/sqitch:latest
+	docker tag pyramation/launchql:0.5.5-12.18.2-alpine3.11 pyramation/launchql:latest
+	docker tag pyramation/launchql-cli:0.5.5-12.18.2-alpine3.11 pyramation/launchql-cli:latest
+	docker push pyramation/sqitch:latest
+	docker push pyramation/launchql:latest
+	docker push pyramation/launchql-cli:latest
+	
 push:
 	docker push pyramation/sqitch:10.21.0-alpine3.11
 	docker push pyramation/sqitch:12.18.2-alpine3.11
