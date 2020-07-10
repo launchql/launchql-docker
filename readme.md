@@ -13,3 +13,7 @@ pyramation/sqitch         10.21.0-alpine3.11             147MB
 pyramation/sqitch         12.18.2-alpine3.11             152MB
 pyramation/sqitch         14.5.0-alpine3.11              180MB
 ```
+
+# credit 
+
+Thanks to https://github.com/sqitchers/docker-sqitch

@@ -23,6 +23,10 @@ push:
 	docker push pyramation/launchql-cli:0.5.5-12.18.2-alpine3.11
 	docker push pyramation/launchql-cli:0.5.5-14.5.0-alpine3.11
 
+sqitch-cli:
+	docker build -t pyramation/sqitch-cli:12.18.2-alpine3.11 ./cli
+	docker tag pyramation/sqitch-cli:12.18.2-alpine3.11 pyramation/sqitch-cli:latest
+
 launchql:
 	docker build -t pyramation/launchql:0.5.5-10.21.0-alpine3.11 node-10.21.0/launchql/
 	docker build -t pyramation/launchql:0.5.5-12.18.2-alpine3.11 node-12.18.2/launchql/
