@@ -70,6 +70,8 @@ RUN mkdir -p /usr/share/man/man1 /usr/share/man/man7 \
 # Copy the app and config from the build image.
 COPY --from=sqitch-build /app .
 COPY --from=sqitch-build /etc/sqitch /etc/sqitch/
+COPY --from=sqitch-build /etc/localtime /etc/localtime 
+COPY --from=sqitch-build /etc/timezone /etc/timezone 
 
 RUN apk del .build-deps2
 
