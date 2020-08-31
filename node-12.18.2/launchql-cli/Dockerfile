@@ -2,6 +2,7 @@ FROM pyramation/sqitch:12.18.2-alpine3.11
 
 ENV NODE_ENV=production
 ENV PATH=$PATH:/home/launchql/bin
+ARG VERSION
 
 RUN mkdir -p /home/launchql/bin && \
     apk add --no-cache bash && \
