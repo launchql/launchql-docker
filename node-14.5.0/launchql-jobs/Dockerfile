@@ -13,4 +13,5 @@ RUN mkdir -p /home/launchql/bin && \
     chmod +x /home/launchql/bin/faas-job-service && \
     apk del .build-deps
 
-ENTRYPOINT ["faas-job-service"]
+ENTRYPOINT ["/bin/bash"]
+

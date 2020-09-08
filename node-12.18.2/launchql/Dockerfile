@@ -13,4 +13,5 @@ RUN mkdir -p /home/launchql/bin && \
     chmod +x /home/launchql/bin/launchql && \
     apk del .build-deps
 
-ENTRYPOINT ["launchql"]
+ENTRYPOINT ["/bin/bash"]
+
