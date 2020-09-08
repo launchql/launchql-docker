@@ -1,53 +1,63 @@
+sqitch = 1.1.0
+alpine = alpine3.11
+cli = 0.5.25
+jobs = 0.2.2
+server = 0.18.3
+node10 = 10.21.0
+node12 = 12.18.2
+node14 = 14.5.0
 
-def:
-	$(MAKE) sqitch
-	$(MAKE) launchql-cli
-	$(MAKE) launchql
-	$(MAKE) sqitch-cli
+all: sqitch launchql-cli launchql-jobs launchql sqitch-cli
 
 latest:
-	docker tag pyramation/sqitch:12.18.2-alpine3.11 pyramation/sqitch:latest
-	docker tag pyramation/launchql:0.18.3-12.18.2-alpine3.11 pyramation/launchql:latest
-	docker tag pyramation/launchql-cli:0.5.25-12.18.2-alpine3.11 pyramation/launchql-cli:latest
+	docker tag pyramation/sqitch:$(node12)-$(alpine) pyramation/sqitch:latest
 	docker push pyramation/sqitch:latest
+	docker tag pyramation/launchql:$(server)-$(node12)-$(alpine) pyramation/launchql:latest
 	docker push pyramation/launchql:latest
+	docker tag pyramation/launchql-cli:$(cli)-$(node12)-$(alpine) pyramation/launchql-cli:latest
 	docker push pyramation/launchql-cli:latest
+	docker tag pyramation/launchql-jobs:$(jobs)-$(node12)-$(alpine) pyramation/launchql-jobs:latest
+	docker push pyramation/launchql-jobs:latest
 	
 push:
-	docker push pyramation/sqitch:10.21.0-alpine3.11
-	docker push pyramation/sqitch:12.18.2-alpine3.11
-	docker push pyramation/sqitch:14.5.0-alpine3.11
-	docker push pyramation/launchql:0.18.3-10.21.0-alpine3.11
-	docker push pyramation/launchql:0.18.3-12.18.2-alpine3.11
-	docker push pyramation/launchql:0.18.3-14.5.0-alpine3.11
-	docker push pyramation/launchql-cli:0.5.25-10.21.0-alpine3.11
-	docker push pyramation/launchql-cli:0.5.25-12.18.2-alpine3.11
-	docker push pyramation/launchql-cli:0.5.25-14.5.0-alpine3.11
+	docker push pyramation/sqitch:$(node10)-$(alpine)
+	docker push pyramation/sqitch:$(node12)-$(alpine)
+	docker push pyramation/sqitch:$(node14)-$(alpine)
+	docker push pyramation/launchql:$(server)-$(node10)-$(alpine)
+	docker push pyramation/launchql:$(server)-$(node12)-$(alpine)
+	docker push pyramation/launchql:$(server)-$(node14)-$(alpine)
+	docker push pyramation/launchql-cli:$(cli)-$(node10)-$(alpine)
+	docker push pyramation/launchql-cli:$(cli)-$(node12)-$(alpine)
+	docker push pyramation/launchql-cli:$(cli)-$(node14)-$(alpine)
+	docker push pyramation/launchql-jobs:$(jobs)-$(node10)-$(alpine)
+	docker push pyramation/launchql-jobs:$(jobs)-$(node12)-$(alpine)
+	docker push pyramation/launchql-jobs:$(jobs)-$(node14)-$(alpine)
 
 sqitch-cli:
-	docker build -t pyramation/sqitch-cli:12.18.2-alpine3.11 ./cli
-	docker tag pyramation/sqitch-cli:12.18.2-alpine3.11 pyramation/sqitch-cli:latest
+	docker build -t pyramation/sqitch-cli:$(node12)-$(alpine) ./cli
+	docker tag pyramation/sqitch-cli:$(node12)-$(alpine) pyramation/sqitch-cli:latest
 
 launchql:
-	docker build -t pyramation/launchql:0.18.3-10.21.0-alpine3.11 node-10.21.0/launchql/ --build-arg VERSION=0.18.3
-	docker build -t pyramation/launchql:0.18.3-12.18.2-alpine3.11 node-12.18.2/launchql/ --build-arg VERSION=0.18.3
-	docker build -t pyramation/launchql:0.18.3-14.5.0-alpine3.11 node-14.5.0/launchql/ --build-arg VERSION=0.18.3
+	docker build -t pyramation/launchql:$(server)-$(node10)-$(alpine) node-$(node10)/launchql/ --build-arg VERSION=$(server)
+	docker build -t pyramation/launchql:$(server)-$(node12)-$(alpine) node-$(node12)/launchql/ --build-arg VERSION=$(server)
+	docker build -t pyramation/launchql:$(server)-$(node14)-$(alpine) node-$(node14)/launchql/ --build-arg VERSION=$(server)
+
+jobs:
+	docker build -t pyramation/launchql-jobs:$(jobs)-$(node10)-$(alpine) node-$(node10)/launchql-jobs/ --build-arg VERSION=$(jobs)
+	docker build -t pyramation/launchql-jobs:$(jobs)-$(node12)-$(alpine) node-$(node12)/launchql-jobs/ --build-arg VERSION=$(jobs)
+	docker build -t pyramation/launchql-jobs:$(jobs)-$(node14)-$(alpine) node-$(node14)/launchql-jobs/ --build-arg VERSION=$(jobs)
 
 sqitch:
-	docker build -t pyramation/sqitch:10.21.0-alpine3.11 node-10.21.0/sqitch/ --build-arg VERSION=1.1.0
-	docker build -t pyramation/sqitch:12.18.2-alpine3.11 node-12.18.2/sqitch/ --build-arg VERSION=1.1.0 
-	docker build -t pyramation/sqitch:14.5.0-alpine3.11 node-14.5.0/sqitch/ --build-arg VERSION=1.1.0 
+	docker build -t pyramation/sqitch:$(node10)-$(alpine) node-$(node10)/sqitch/ --build-arg VERSION=$(sqitch)
+	docker build -t pyramation/sqitch:$(node12)-$(alpine) node-$(node12)/sqitch/ --build-arg VERSION=$(sqitch) 
+	docker build -t pyramation/sqitch:$(node14)-$(alpine) node-$(node14)/sqitch/ --build-arg VERSION=$(sqitch) 
 
 launchql-cli:
-	docker build -t pyramation/launchql-cli:0.5.25-10.21.0-alpine3.11 node-10.21.0/launchql-cli/ --build-arg VERSION=0.5.25
-	docker build -t pyramation/launchql-cli:0.5.25-12.18.2-alpine3.11 node-12.18.2/launchql-cli/ --build-arg VERSION=0.5.25
-	docker build -t pyramation/launchql-cli:0.5.25-14.5.0-alpine3.11 node-14.5.0/launchql-cli/ --build-arg VERSION=0.5.25
+	docker build -t pyramation/launchql-cli:$(cli)-$(node10)-$(alpine) node-$(node10)/launchql-cli/ --build-arg VERSION=$(cli)
+	docker build -t pyramation/launchql-cli:$(cli)-$(node12)-$(alpine) node-$(node12)/launchql-cli/ --build-arg VERSION=$(cli)
+	docker build -t pyramation/launchql-cli:$(cli)-$(node14)-$(alpine) node-$(node14)/launchql-cli/ --build-arg VERSION=$(cli)
 
-# run14:
-# 	docker run -it pyramation/launchql:0.5.5-node-14.5.0
-
-# run12:
-# 	docker run -it pyramation/launchql:0.5.5-node-12.18.2
-
-# run10:
-# 	docker run -it pyramation/launchql:0.5.5-node-10.21.0
+launchql-jobs:
+	docker build -t pyramation/launchql-jobs:$(jobs)-$(node10)-$(alpine) node-$(node10)/launchql-jobs/ --build-arg VERSION=$(jobs)
+	docker build -t pyramation/launchql-jobs:$(jobs)-$(node12)-$(alpine) node-$(node12)/launchql-jobs/ --build-arg VERSION=$(jobs)
+	docker build -t pyramation/launchql-jobs:$(jobs)-$(node14)-$(alpine) node-$(node14)/launchql-jobs/ --build-arg VERSION=$(jobs)
