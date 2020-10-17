@@ -1,15 +1,18 @@
 sqitch = 1.1.0
 alpine = alpine3.11
 
-cli = 0.8.14
+cli = 0.8.15
 jobs = 0.2.3
-server = 0.19.21
+server = 0.19.22
 
 node10 = 10.21.0
 node12 = 12.18.2
 node14 = 14.5.0
 
 all: sqitch launchql-cli launchql-jobs launchql sqitch-cli
+
+lql: launchql-cli launchql push latest
+lqlpush: push latest
 
 latest:
 	docker tag pyramation/sqitch:$(node12)-$(alpine) pyramation/sqitch:latest
