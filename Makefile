@@ -1,9 +1,9 @@
 sqitch = 1.1.0
 alpine = alpine3.11
 
-cli = 1.1.0
-jobs = 0.2.3
-server = 0.19.31
+cli = 1.2.0
+jobs = 0.2.4
+server = 0.20.0
 
 node12 = 12.18.2
 node14 = 14.5.0
@@ -11,6 +11,7 @@ node14 = 14.5.0
 all: sqitch launchql-cli launchql-jobs launchql sqitch-cli
 
 lql: launchql-cli launchql push latest
+lql-jobs: launchql-cli launchql-jobs launchql push latest
 lqlpush: push latest
 
 echo:
@@ -34,7 +35,7 @@ push:
 	docker push pyramation/launchql:$(server)-$(node12)-$(alpine)
 	docker push pyramation/launchql-cli:$(cli)-$(node12)-$(alpine)
 	docker push pyramation/launchql-jobs:$(jobs)-$(node12)-$(alpine)
-	docker push pyramation/node-gyp:$(jobs)-$(node12)-$(alpine)
+	#docker push pyramation/node-gyp:$(jobs)-$(node12)-$(alpine)
 
 
 
