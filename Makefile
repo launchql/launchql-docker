@@ -1,9 +1,9 @@
 sqitch = 1.1.0
 alpine = alpine3.11
 
-cli = 2.3.0
+cli = 3.0.0
 jobs = 0.3.0
-server = 0.25.0
+server = 1.0.0
 
 node12 = 12.18.2
 node14 = 14.5.0
